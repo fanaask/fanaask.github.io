@@ -6,74 +6,90 @@
 
 body {
   font-family: Arial, sans-serif;
-  background: #141824;
+  background: #151922;
   color: #ddd;
   line-height: 1.6;
-  display: grid;
-  grid-template-columns: 1fr 350px;
-  min-height: 100vh;
+  padding-right: 420px;
 }
 
-/* PRAWA KOLUMNA */
-body::after {
+/* ZDJĘCIE 1 */
+body::before {
   content: "";
-  grid-column: 2;
-  grid-row: 1 / -1;
-  background:
-    linear-gradient(rgba(20,24,36,.8), rgba(20,24,36,.9)),
-    url("https://images.unsplash.com/photo-1518709268805-4e9042af9f23");
+  position: fixed;
+  top: 60px;
+  right: 40px;
+  width: 260px;
+  height: 520px;
+  background: url("6.jpg");
   background-size: cover;
   background-position: center;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.6);
 }
 
-/* LEWA STRONA */
+/* ZDJĘCIE 2 */
+body::after {
+  content: "";
+  position: fixed;
+  top: 420px;
+  right: 10px;
+  width: 280px;
+  height: 520px;
+  background: url("7.jpg");
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.6);
+}
+
+/* ZDJĘCIE 3 */
+header::after {
+  content: "";
+  position: fixed;
+  top: 780px;
+  right: 60px;
+  width: 240px;
+  height: 480px;
+  background: url("8.jpg");
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.6);
+}
+
+/* TEKST */
 header,
 h2,
 h3,
 p,
-footer {
-  grid-column: 1;
-  padding-left: 40px;
-  padding-right: 20px;
-}
-
-header {
-  padding-top: 40px;
+ul {
+  max-width: 700px;
+  margin-left: 40px;
 }
 
 h1 {
-  font-size: 2.8rem;
+  font-size: 2.6rem;
   color: #b388ff;
+  margin-top: 40px;
 }
 
 h2 {
   margin-top: 30px;
   color: #9575cd;
+  border-left: 4px solid #7e57c2;
+  padding-left: 15px;
 }
 
-h3 {
-  margin-top: 15px;
-  color: #ccc;
-}
-
-p {
-  margin: 10px 0;
-  max-width: 700px;
-}
-
-/* subtelny gradient */
-header {
-  background: linear-gradient(90deg, rgba(123,31,162,.2), transparent);
-}
-
-/* RESPONSYWNOŚĆ */
+/* MOBILE */
 @media (max-width: 900px) {
 
   body {
-    grid-template-columns: 1fr;
+    padding-right: 0;
   }
 
-  body::after {
+  body::before,
+  body::after,
+  header::after {
     display: none;
   }
 
@@ -81,11 +97,8 @@ header {
   h2,
   h3,
   p,
-  footer {
-    padding: 15px;
-  }
-
-  h1 {
-    font-size: 2rem;
+  ul {
+    margin: 15px;
+    max-width: none;
   }
 }
