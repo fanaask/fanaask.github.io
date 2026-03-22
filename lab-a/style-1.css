@@ -1,3 +1,4 @@
+/* style-1.css */
 * {
   margin: 0;
   padding: 0;
@@ -5,9 +6,10 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Arial", sans-serif;
   background: #0a0a0f;
   color: #eee;
+  line-height: 1.6;
 }
 
 /* HEADER */
@@ -18,9 +20,17 @@ header {
   background-position: center;
   padding: 80px 20px;
   text-align: center;
+  border: 2px solid #444;
+  border-radius: 12px;
 }
 
-.block {
+h1 {
+  font-size: 3rem;
+  color: #f5c542;
+}
+
+/* SEKCJE */
+section.block {
   margin: 40px 20px;
   padding: 40px;
   border-radius: 12px;
@@ -28,62 +38,80 @@ header {
   background-position: center;
   position: relative;
   overflow: hidden;
+  border: 2px solid #333;
 }
 
-.block::before {
+/* ciemny overlay */
+section.block::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,.75);
+  background: rgba(0,0,0,.7);
+  border-radius: 12px;
+  z-index: 0;
 }
 
-.block * {
+/* tekst w sekcji */
+section.block * {
   position: relative;
+  z-index: 1;
 }
 
-/* obrazy */
-.nazarick {
-  background-image: url("2.jpg");
-}
+section.nazarick { background-image: url("2.jpg"); }
+section.reestize { background-image: url("3.jpg"); }
+section.baharuth { background-image: url("4.jpg"); }
 
-.reestize {
-  background-image: url("3.jpg");
-}
-
-.baharuth {
-  background-image: url("4.jpg");
-}
-
+/* nagłówki i tekst */
 h2 {
-  margin-bottom: 20px;
   font-size: 2rem;
+  margin-bottom: 20px;
+  color: #ffd700;
 }
 
 h3 {
+  font-size: 1.5rem;
   margin-top: 15px;
+  color: #ffcc66;
 }
 
 p {
-  margin-top: 5px;
+  margin-top: 10px;
+  font-size: 1rem;
 }
 
-.baharuth-list {
-  list-style: none;
-  margin-bottom: 20px;
+ul.baharuth-list {
+  list-style: disc inside;
+  margin: 10px 0;
+  padding-left: 20px;
 }
 
-.baharuth-list li {
-  padding: 5px 0;
+/* LISTA tło */
+ul.baharuth-list {
+  background: linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,.85)),
+  url("5.jpg");
+  border-radius: 8px;
+  padding: 15px;
+  border: 2px solid #555;
 }
 
-/* MOBILE */
+ul.baharuth-list li {
+  margin-bottom: 6px;
+}
+
+/* FOOTER */
+footer {
+  margin: 40px 20px;
+  padding: 20px;
+  border: 2px solid #444;
+  border-radius: 12px;
+  text-align: center;
+  background: #111;
+}
+
+/* RESPONSYWNOŚĆ */
 @media (max-width: 768px) {
-
-  .block {
-    padding: 25px;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-  }
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.2rem; }
+  section.block, header, footer { padding: 25px; margin: 20px 10px; }
 }
