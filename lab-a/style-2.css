@@ -79,12 +79,23 @@ header::before {
 
 /* RESPONSYWNOŚĆ - mobile */
 @media (max-width: 900px) {
-  body { grid-template-columns: 1fr; padding: 0 15px; }
-  header, section.block { padding-right: 0; }
+  body {
+    grid-template-columns: 1fr;
+    padding: 0 15px;
+  }
 
+  header, section.block {
+    padding-right: 0;
+  }
+
+  /* 🔥 zdjęcia przechodzą pod treść */
   body::before,
   body::after,
   header::before {
-    content: none;
+    position: static;
+    display: block;
+    width: 100%;
+    height: 250px;
+    margin: 20px 0;
   }
 }
