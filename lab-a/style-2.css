@@ -87,4 +87,10 @@ header::before {
   header, section.block {
     padding-right: 0;
   }
+
+  section.nazarick::after,
+  section.reestize::after,
+  section.baharuth::after {
+    display: none;
+  }
 }
