@@ -27,6 +27,7 @@ header {
   border: 2px solid #555;
   border-radius: 12px;
   background: #1a1f2a;
+  text-align: center;
 }
 
 h1 {
@@ -42,9 +43,10 @@ section.block {
   border-radius: 12px;
   background: #1b1f2f;
   position: relative;
+  z-index: 1;
 }
 
-/* nagłówki */
+/* nagłówki i tekst */
 h2 { font-size: 2rem; color: #9575cd; margin-bottom: 15px; }
 h3 { font-size: 1.4rem; color: #c6a0ff; margin-top: 10px; }
 p { font-size: 1rem; margin: 8px 0; }
@@ -60,54 +62,54 @@ footer {
   text-align: center;
 }
 
-/* PRAWA KOLUMNA - pseudo-elementy */
+/* PRAWA KOLUMNA - zdjęcia jako fixed pseudo-elementy */
 section.nazarick::after,
 section.reestize::after,
 section.baharuth::after {
   content: "";
-  position: absolute;
-  right: 0;
+  position: fixed;
   border-radius: 10px;
   box-shadow: 0 10px 25px rgba(0,0,0,.6);
   background-size: cover;
   background-position: center;
+  z-index: 0;
 }
 
-/* zdjęcia przesunięte */
+/* przesunięte, różne pozycje */
 section.nazarick::after {
   top: 60px;
+  right: 10px;
   width: 260px;
   height: 520px;
   background-image: url("6.jpg");
 }
 section.reestize::after {
   top: 420px;
+  right: 40px;
   width: 280px;
   height: 520px;
-  right: 20px;
   background-image: url("7.jpg");
 }
 section.baharuth::after {
   top: 780px;
+  right: 20px;
   width: 240px;
   height: 480px;
-  right: 40px;
   background-image: url("8.jpg");
 }
 
-/* RESPONSYWNOŚĆ - mobile, zdjęcia wciąż widoczne */
+/* MOBILE - zdjęcia wciąż widoczne i lekko nachodzą */
 @media (max-width: 900px) {
   body { grid-template-columns: 1fr; padding: 0 15px; }
   header, section.block { padding-right: 0; }
 
-  /* przesunięte w dół */
   section.nazarick::after {
-    top: auto; bottom: 600px; width: 35%; height: auto; right: 10px;
+    top: auto; bottom: 550px; right: 10px; width: 35%; height: auto;
   }
   section.reestize::after {
-    top: auto; bottom: 300px; width: 38%; height: auto; right: 20px;
+    top: auto; bottom: 320px; right: 20px; width: 38%; height: auto;
   }
   section.baharuth::after {
-    top: auto; bottom: 20px; width: 32%; height: auto; right: 0;
+    top: auto; bottom: 50px; right: 0; width: 32%; height: auto;
   }
 }
