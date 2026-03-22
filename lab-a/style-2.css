@@ -5,108 +5,91 @@
 }
 
 body {
-  font-family: "Arial", sans-serif;
+  font-family: Arial, sans-serif;
   background: #141824;
   color: #ddd;
   display: grid;
   grid-template-columns: 1fr 420px;
-  gap: 0 0;
+  padding: 0 0 0 40px;
   position: relative;
 }
 
-/* LEWA KOLUMNA - tekst */
+/* LEWA STRONA - treść */
 header, section.block {
   grid-column: 1;
   padding-right: 20px;
 }
 
-/* HEADER */
-header {
-  padding: 40px 20px;
-  border: 2px solid #555;
-  border-radius: 12px;
-  background: #1a1f2a;
-  text-align: center;
-}
-
+/* H1, H2, h3, p */
 h1 {
   font-size: 2.6rem;
   color: #b388ff;
-}
-
-/* SEKCJE - bez obramowania */
-section.block {
-  margin-top: 30px;
-  padding: 30px;
-  border-left: none;
-  border-radius: 12px;
-  background: #1b1f2f;
-  position: relative;
-  z-index: 1;
-}
-
-/* nagłówki i tekst */
-h2 { font-size: 2rem; color: #9575cd; margin-bottom: 15px; }
-h3 { font-size: 1.4rem; color: #c6a0ff; margin-top: 10px; }
-p { font-size: 1rem; margin: 8px 0; }
-ul.baharuth-list { list-style: disc inside; margin: 10px 0; padding-left: 20px; }
-
-/* FOOTER - tylko tutaj ramka */
-footer {
   margin-top: 40px;
-  padding: 20px;
-  border: 2px solid #555;
-  border-radius: 12px;
-  background: #1a1f2a;
-  text-align: center;
-  grid-column: 1 / -1; /* zajmuje całą szerokość */
 }
 
-/* PRAWA KOLUMNA - zdjęcia jako absolute, przesuwają się ze stroną */
-section.nazarick::after,
-section.reestize::after,
-section.baharuth::after {
+h2 {
+  margin-top: 30px;
+  border-left: 4px solid #7e57c2;
+  padding-left: 15px;
+  color: #9575cd;
+}
+
+p, h3, ul {
+  margin: 10px 0;
+  max-width: 700px;
+}
+
+/* PRAWA KOLUMNA - zdjęcia jako pseudo-elementy sekcji */
+.block.nazarick::after {
   content: "";
   position: absolute;
-  border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0,0,0,.6);
-  background-size: cover;
-  background-position: center;
-  z-index: 0;
-}
-
-/* desktop */
-section.nazarick::after {
   top: 60px;
-  right: 10px;
+  right: 0;
   width: 260px;
   height: 520px;
-  background-image: url("6.jpg");
+  background: url("6.jpg") no-repeat center/cover;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.6);
 }
 
-section.reestize::after {
+.block.reestize::after {
+  content: "";
+  position: absolute;
   top: 420px;
-  right: 40px;
+  right: 20px;
   width: 280px;
   height: 520px;
-  background-image: url("7.jpg");
+  background: url("7.jpg") no-repeat center/cover;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.6);
 }
 
-section.baharuth::after {
+.block.baharuth::after {
+  content: "";
+  position: absolute;
   top: 780px;
-  right: 20px;
+  right: 0;
   width: 240px;
   height: 480px;
-  background-image: url("8.jpg");
+  background: url("8.jpg") no-repeat center/cover;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.6);
 }
 
+/* RESPONSYWNOŚĆ */
 @media (max-width: 900px) {
-  body { grid-template-columns: 1fr; padding: 0 15px; }
-  header, section.block { padding-right: 0; }
+  body {
+    grid-template-columns: 1fr;
+    padding: 0 15px;
+  }
 
-  section.nazarick::after,
-  section.reestize::after,
-  section.baharuth::after {
-    display: none;
+  .block.nazarick::after,
+  .block.reestize::after,
+  .block.baharuth::after {
+    display: none; /* zdjęcia znikają na mobile */
+  }
+
+  header, section.block {
+    padding: 0;
   }
 }
