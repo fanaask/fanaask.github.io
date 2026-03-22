@@ -5,72 +5,65 @@
 }
 
 body {
+  display: grid;
+  grid-template-columns: 1fr 420px;
   font-family: Arial, sans-serif;
   background: #151922;
   color: #ddd;
-  line-height: 1.6;
-  padding-right: 420px;
 }
 
-/* ZDJĘCIE 1 */
-body::before {
-  content: "";
-  position: fixed;
-  top: 60px;
-  right: 40px;
-  width: 260px;
-  height: 520px;
-  background: url("6.jpg");
-  background-size: cover;
-  background-position: center;
+/* PRAWA STRONA */
+.side-images {
+  grid-column: 2;
+  grid-row: 1 / -1;
+  position: relative;
+  padding-top: 40px;
+}
+
+.side-images img {
+  width: 85%;
+  height: auto;
+  position: relative;
+  object-fit: cover;
   border-radius: 10px;
   box-shadow: 0 10px 25px rgba(0,0,0,.6);
 }
 
-/* ZDJĘCIE 2 */
-body::after {
-  content: "";
-  position: fixed;
-  top: 420px;
-  right: 10px;
-  width: 280px;
-  height: 520px;
-  background: url("7.jpg");
-  background-size: cover;
-  background-position: center;
-  border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0,0,0,.6);
+/* przesunięcia */
+.side-images img:nth-child(1) {
+  left: 0;
+  margin-bottom: 40px;
 }
 
-/* ZDJĘCIE 3 */
-header::after {
-  content: "";
-  position: fixed;
-  top: 780px;
-  right: 60px;
-  width: 240px;
-  height: 480px;
-  background: url("8.jpg");
-  background-size: cover;
-  background-position: center;
-  border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0,0,0,.6);
+.side-images img:nth-child(2) {
+  left: 40px;
+  width: 90%;
+  margin-bottom: 40px;
 }
 
-/* TEKST */
+.side-images img:nth-child(3) {
+  left: 15px;
+  width: 80%;
+}
+
+/* LEWA STRONA */
 header,
 h2,
 h3,
 p,
 ul {
-  max-width: 700px;
-  margin-left: 40px;
+  grid-column: 1;
+  padding-left: 40px;
+  padding-right: 20px;
+}
+
+header {
+  padding-top: 40px;
 }
 
 h1 {
   font-size: 2.6rem;
   color: #b388ff;
-  margin-top: 40px;
 }
 
 h2 {
@@ -80,17 +73,31 @@ h2 {
   padding-left: 15px;
 }
 
+p {
+  max-width: 700px;
+}
+
+.baharuth-list {
+  list-style: none;
+  margin: 10px 0;
+}
+
 /* MOBILE */
 @media (max-width: 900px) {
 
   body {
-    padding-right: 0;
+    grid-template-columns: 1fr;
   }
 
-  body::before,
-  body::after,
-  header::after {
-    display: none;
+  .side-images {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .side-images img {
+    position: static;
+    width: 33.33%;
   }
 
   header,
@@ -98,7 +105,6 @@ h2 {
   h3,
   p,
   ul {
-    margin: 15px;
-    max-width: none;
+    padding: 15px;
   }
 }
