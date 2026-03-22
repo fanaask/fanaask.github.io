@@ -88,14 +88,10 @@ header::before {
     padding-right: 0;
   }
 
-  /* 🔥 zdjęcia przechodzą pod treść */
+  /* 🔥 USUWAMY pseudo-elementy CAŁKOWICIE */
   body::before,
   body::after,
   header::before {
-    position: static;
-    display: block;
-    width: 100%;
-    height: 250px;
-    margin: 20px 0;
+    content: none !important;
   }
 }
