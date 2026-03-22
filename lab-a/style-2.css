@@ -82,9 +82,9 @@ header::before {
   body { grid-template-columns: 1fr; padding: 0 15px; }
   header, section.block { padding-right: 0; }
 
-  section.nazarick::after,
-  section.reestize::after,
-  section.baharuth::after {
+  body::before,
+  body::after,
+  header::before {
     display: none;
   }
 }
