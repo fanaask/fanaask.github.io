@@ -5,85 +5,109 @@
 }
 
 body {
+  font-family: Arial, sans-serif;
+  background: #141824;
+  color: #ddd;
   display: grid;
   grid-template-columns: 1fr 420px;
-  font-family: Arial, sans-serif;
-  background: #151922;
-  color: #ddd;
-}
-
-/* PRAWA KOLUMNA */
-.side-images {
-  grid-column: 2;
-  grid-row: 1 / -1;
-  display: flex;
-  flex-direction: column;
-}
-
-.side-images img {
-  width: 100%;
-  height: 33.33vh;
-  object-fit: cover;
-}
-
-/* LEWA STRONA */
-header,
-h2,
-h3,
-p,
-ul {
-  grid-column: 1;
   padding-left: 40px;
-  padding-right: 20px;
+  position: relative;
 }
 
-header {
-  padding-top: 40px;
+/* LEWA KOLUMNA */
+header, section.block {
+  grid-column: 1;
+  padding-right: 20px;
 }
 
 h1 {
   font-size: 2.6rem;
   color: #b388ff;
+  margin-top: 40px;
 }
 
 h2 {
   margin-top: 30px;
-  color: #9575cd;
   border-left: 4px solid #7e57c2;
   padding-left: 15px;
+  color: #9575cd;
 }
 
-p {
+p, h3, ul {
+  margin: 10px 0;
   max-width: 700px;
 }
 
-.baharuth-list {
-  list-style: none;
-  margin: 10px 0;
+/* PRAWA KOLUMNA - zdjęcia przesunięte */
+.block.nazarick::after {
+  content: "";
+  position: fixed;
+  top: 60px;
+  right: 10px;
+  width: 260px;
+  height: 520px;
+  background: url("6.jpg") no-repeat center/cover;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.6);
 }
 
-/* RESPONSYWNOŚĆ */
-@media (max-width: 900px) {
+.block.reestize::after {
+  content: "";
+  position: fixed;
+  top: 420px;
+  right: 40px;
+  width: 280px;
+  height: 520px;
+  background: url("7.jpg") no-repeat center/cover;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.6);
+}
 
+.block.baharuth::after {
+  content: "";
+  position: fixed;
+  top: 780px;
+  right: 20px;
+  width: 240px;
+  height: 480px;
+  background: url("8.jpg") no-repeat center/cover;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.6);
+}
+
+/* RESPONSYWNOŚĆ - mobile */
+@media (max-width: 900px) {
   body {
     grid-template-columns: 1fr;
+    padding-left: 15px;
   }
 
-  .side-images {
-    grid-column: 1;
-    flex-direction: row;
+  header, section.block {
+    padding-right: 0;
   }
 
-  .side-images img {
-    width: 33.33%;
-    height: 200px;
+  /* zdjęcia przesuwamy w dół i zmniejszamy */
+  .block.nazarick::after {
+    top: auto;
+    bottom: 620px;
+    right: 10px;
+    width: 35%;
+    height: auto;
   }
 
-  header,
-  h2,
-  h3,
-  p,
-  ul {
-    padding: 15px;
+  .block.reestize::after {
+    top: auto;
+    bottom: 300px;
+    right: 20px;
+    width: 38%;
+    height: auto;
+  }
+
+  .block.baharuth::after {
+    top: auto;
+    bottom: 20px;
+    right: 0;
+    width: 32%;
+    height: auto;
   }
 }
