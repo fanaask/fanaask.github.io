@@ -79,14 +79,8 @@ header::before {
 
 /* RESPONSYWNOŚĆ - mobile */
 @media (max-width: 900px) {
-  body {
-    grid-template-columns: 1fr;
-    padding: 0 15px;
-  }
-
-  header, section.block {
-    padding-right: 0;
-  }
+  body { grid-template-columns: 1fr; padding: 0 15px; }
+  header, section.block { padding-right: 0; }
 
   section.nazarick::after,
   section.reestize::after,
