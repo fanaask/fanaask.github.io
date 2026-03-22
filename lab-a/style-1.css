@@ -8,6 +8,7 @@ body {
   font-family: Arial, sans-serif;
   background: #0a0a0f;
   color: #eee;
+  line-height: 1.6;
 }
 
 /* HEADER */
@@ -24,30 +25,47 @@ h1 {
   font-size: 3rem;
 }
 
-/* BLOKI H2 */
+/* BLOKI SEKCJI */
 h2 {
-  margin: 30px 20px 10px;
-  padding: 120px 30px;
-  border-radius: 12px;
+  margin: 40px 20px 0;
+  padding: 40px 30px 10px;
+  border-radius: 12px 12px 0 0;
   background-size: cover;
   background-position: center;
   position: relative;
-  overflow: hidden;
 }
 
 h2::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,.65);
+  background: rgba(0,0,0,.7);
+  border-radius: 12px 12px 0 0;
 }
 
-h2 {
-  color: white;
-  font-size: 2rem;
+h2, h3, p, .baharuth-list {
+  position: relative;
 }
 
-/* tła */
+/* część środkowa bloku */
+h2 + h3,
+h2 + h3 + p,
+h2 + h3 + p + h3,
+h2 + h3 + p + h3 + p,
+h2 + .baharuth-list {
+  margin: 0 20px;
+  padding: 0 30px;
+  background: rgba(0,0,0,.7);
+}
+
+/* dół bloku */
+h2 + h3 + p:last-of-type,
+.baharuth-list {
+  padding-bottom: 40px;
+  border-radius: 0 0 12px 12px;
+}
+
+/* tła sekcji */
 h2:nth-of-type(1) {
   background-image: url("2.jpg");
 }
@@ -60,41 +78,38 @@ h2:nth-of-type(3) {
   background-image: url("4.jpg");
 }
 
-/* TEKST */
-h3, p {
-  margin: 15px 25px;
-}
-
-/* LISTA BLOK */
+/* LISTA */
 .baharuth-list {
-  margin: 20px;
-  padding: 80px 30px;
   list-style: none;
-  border-radius: 12px;
-  background: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.85)),
+  margin: 0 20px 40px;
+  background: linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,.85)),
   url("5.jpg");
   background-size: cover;
   background-position: center;
+  padding: 20px 30px 40px;
+  border-radius: 0 0 12px 12px;
 }
 
 .baharuth-list li {
-  padding: 8px 0;
+  padding: 6px 0;
   border-bottom: 1px solid rgba(255,255,255,.2);
 }
 
 /* RESPONSYWNOŚĆ */
 @media (max-width: 768px) {
 
-  h2 {
-    padding: 80px 20px;
-    font-size: 1.5rem;
-  }
-
-  .baharuth-list {
-    padding: 40px 20px;
-  }
-
   h1 {
     font-size: 2rem;
+  }
+
+  h2 {
+    padding: 30px 20px 10px;
+  }
+
+  h2 + h3,
+  h2 + h3 + p,
+  h2 + h3 + p + h3,
+  h2 + h3 + p + h3 + p {
+    padding: 0 20px;
   }
 }
