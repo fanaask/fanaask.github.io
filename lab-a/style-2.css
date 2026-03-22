@@ -85,6 +85,6 @@ header::before {
   body::before,
   body::after,
   header::before {
-    display: none;
+    content: none;
   }
 }
