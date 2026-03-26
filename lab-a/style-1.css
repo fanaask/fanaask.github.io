@@ -1,4 +1,3 @@
-/* style-1.css */
 * {
   margin: 0;
   padding: 0;
@@ -12,7 +11,6 @@ body {
   line-height: 1.6;
 }
 
-/* HEADER */
 header {
   background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.9)),
   url("1.jpg");
@@ -29,7 +27,6 @@ h1 {
   color: #f5c542;
 }
 
-/* SEKCJE */
 section.block {
   margin: 40px 20px;
   padding: 40px;
@@ -41,7 +38,6 @@ section.block {
   border: 2px solid #333;
 }
 
-/* ciemny overlay */
 section.block::before {
   content: "";
   position: absolute;
@@ -51,7 +47,6 @@ section.block::before {
   z-index: 0;
 }
 
-/* tekst w sekcji */
 section.block * {
   position: relative;
   z-index: 1;
@@ -61,7 +56,6 @@ section.nazarick { background-image: url("2.jpg"); }
 section.reestize { background-image: url("3.jpg"); }
 section.baharuth { background-image: url("4.jpg"); }
 
-/* nagłówki i tekst */
 h2 {
   font-size: 2rem;
   margin-bottom: 20px;
@@ -85,7 +79,6 @@ ul.baharuth-list {
   padding-left: 20px;
 }
 
-/* LISTA tło */
 ul.baharuth-list {
   background: linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,.85)),
   url("5.jpg");
@@ -98,7 +91,6 @@ ul.baharuth-list li {
   margin-bottom: 6px;
 }
 
-/* FOOTER */
 footer {
   margin: 40px 20px;
   padding: 20px;
@@ -108,7 +100,6 @@ footer {
   background: #111;
 }
 
-/* RESPONSYWNOŚĆ */
 @media (max-width: 768px) {
   h1 { font-size: 2rem; }
   h2 { font-size: 1.5rem; }
