@@ -30,7 +30,15 @@ class Todo {
       const li = document.createElement("li");
 
       const span = document.createElement("span");
-      span.innerHTML = this.highlight(task.text, filter);
+
+      let text = task.text;
+
+      if (task.date) {
+        const date = new Date(task.date);
+        text += ` (${date.toLocaleString()})`;
+      }
+
+      span.innerHTML = this.highlight(text, filter);
 
       span.addEventListener("click", () => this.edit(index));
 
