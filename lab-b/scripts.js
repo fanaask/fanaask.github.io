@@ -96,29 +96,53 @@ class Todo {
 
   edit(index) {
     const li = this.list.children[index];
-    const input = document.createElement("input");
 
-    input.type = "text";
-    input.value = this.tasks[index].text;
+    const textInput = document.createElement("input");
+    textInput.type = "text";
+    textInput.value = this.tasks[index].text;
+
+    const dateInput = document.createElement("input");
+    dateInput.type = "datetime-local";
+    dateInput.value = this.tasks[index].date || "";
 
     li.innerHTML = "";
-    li.appendChild(input);
-    input.focus();
+    li.appendChild(textInput);
+    li.appendChild(dateInput);
+
+    textInput.focus();
 
     const saveEdit = () => {
-      const value = input.value.trim();
+      const newText = textInput.value.trim();
+      const newDate = dateInput.value;
 
-      if (value.length >= 3 && value.length <= 255) {
-        this.tasks[index].text = value;
-        this.save();
+      if (newText.length < 3 || newText.length > 255) {
+        alert("3-255 znaków");
+        this.draw();
+        return;
       }
 
+      if (newDate) {
+        const now = new Date();
+        const selected = new Date(newDate);
+        if (selected <= now) {
+          alert("Data musi być w przyszłości");
+          this.draw();
+          return;
+        }
+      }
+
+      this.tasks[index].text = newText;
+      this.tasks[index].date = newDate || null;
+
+      this.save();
       this.draw();
     };
 
-    input.addEventListener("blur", saveEdit);
-    input.addEventListener("keypress", e => {
-      if (e.key === "Enter") input.blur();
+    textInput.addEventListener("blur", saveEdit);
+    dateInput.addEventListener("blur", saveEdit);
+
+    textInput.addEventListener("keypress", e => {
+      if (e.key === "Enter") textInput.blur();
     });
   }
 }
