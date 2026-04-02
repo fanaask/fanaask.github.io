@@ -77,7 +77,10 @@ class Todo {
       }
     }
 
-    this.tasks.push({ text, date });
+    this.tasks.push({
+      text: text,
+      date: date || null
+    });
     this.taskInput.value = "";
     this.taskDate.value = "";
 
