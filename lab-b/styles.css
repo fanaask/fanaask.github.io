@@ -11,21 +11,27 @@ body {
   border-radius: 8px;
 }
 
-#taskList {
+#search {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+ul {
   list-style: none;
   padding: 0;
 }
 
-#taskList li {
+li {
   padding: 10px;
-  border-bottom: 1px solid darkgray;
+  border-bottom: 1px solid #ddd;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-#taskList li span {
-  flex: 1;
+li span {
+  flex-grow: 1;
   cursor: pointer;
 }
 
@@ -45,8 +51,4 @@ body {
 
 .highlight {
   background: yellow;
-}
-
-input[type="text"], input[type="datetime-local"] {
-  padding: 5px;
 }

@@ -4,11 +4,11 @@ class Todo {
 
     this.taskInput = document.getElementById("taskInput");
     this.taskDate = document.getElementById("taskDate");
-    this.addBtn = document.getElementById("addBtn");
-    this.taskList = document.getElementById("taskList");
+    this.addBtn = document.getElementById("addTaskBtn");
+    this.list = document.getElementById("taskList");
     this.search = document.getElementById("search");
 
-    this.addBtn.addEventListener("click", () => this.addTask());
+    this.addBtn.addEventListener("click", () => this.add());
     this.search.addEventListener("input", () => this.draw());
 
     this.draw();
@@ -19,87 +19,94 @@ class Todo {
   }
 
   draw() {
-    const phrase = this.search.value.toLowerCase();
-    this.taskList.innerHTML = "";
+    this.list.innerHTML = "";
+    const filter = this.search.value.toLowerCase();
 
     this.tasks.forEach((task, index) => {
-      if (phrase.length >= 2 && !task.text.toLowerCase().includes(phrase)) {
+      if (filter.length >= 2 && !task.text.toLowerCase().includes(filter)) {
         return;
       }
 
       const li = document.createElement("li");
 
       const span = document.createElement("span");
-      span.innerHTML = this.highlight(task.text, phrase);
-      span.addEventListener("click", () => this.editTask(span, index));
+      span.innerHTML = this.highlight(task.text, filter);
 
-      const date = document.createElement("small");
-      date.textContent = task.date ? " (" + task.date + ")" : "";
+      span.addEventListener("click", () => this.edit(index));
 
       const del = document.createElement("button");
       del.textContent = "🗑";
       del.className = "delete-btn";
-      del.onclick = () => {
-        this.tasks.splice(index, 1);
-        this.save();
-        this.draw();
-      };
+      del.addEventListener("click", () => this.remove(index));
 
       li.appendChild(span);
-      li.appendChild(date);
       li.appendChild(del);
-
-      this.taskList.appendChild(li);
+      this.list.appendChild(li);
     });
   }
 
-  highlight(text, phrase) {
-    if (phrase.length < 2) return text;
-    const regex = new RegExp(`(${phrase})`, "gi");
+  highlight(text, filter) {
+    if (filter.length < 2) return text;
+    const regex = new RegExp(`(${filter})`, "gi");
     return text.replace(regex, `<span class="highlight">$1</span>`);
   }
 
-  addTask() {
+  add() {
     const text = this.taskInput.value.trim();
     const date = this.taskDate.value;
 
     if (text.length < 3 || text.length > 255) {
-      alert("Zadanie musi mieć 3-255 znaków");
+      alert("3-255 znaków");
       return;
     }
 
-    if (date && new Date(date) <= new Date()) {
-      alert("Data musi być w przyszłości");
-      return;
+    if (date) {
+      const now = new Date();
+      const selected = new Date(date);
+      if (selected <= now) {
+        alert("Data musi być w przyszłości");
+        return;
+      }
     }
 
     this.tasks.push({ text, date });
-    this.save();
-    this.draw();
-
     this.taskInput.value = "";
     this.taskDate.value = "";
+
+    this.save();
+    this.draw();
   }
 
-  editTask(span, index) {
+  remove(index) {
+    this.tasks.splice(index, 1);
+    this.save();
+    this.draw();
+  }
+
+  edit(index) {
+    const li = this.list.children[index];
     const input = document.createElement("input");
+
     input.type = "text";
     input.value = this.tasks[index].text;
 
-    span.replaceWith(input);
+    li.innerHTML = "";
+    li.appendChild(input);
     input.focus();
 
-    const save = () => {
+    const saveEdit = () => {
       const value = input.value.trim();
+
       if (value.length >= 3 && value.length <= 255) {
         this.tasks[index].text = value;
         this.save();
       }
+
       this.draw();
     };
 
-    input.addEventListener("blur", save);
-    input.addEventListener("keydown", e => {
+    input.addEventListener("blur", saveEdit);
+    input.addEventListener("keypress", e => {
       if (e.key === "Enter") input.blur();
     });
   }
