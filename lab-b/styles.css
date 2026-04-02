@@ -12,6 +12,11 @@ body {
   align-items: center;
 }
 
+#taskList {
+  list-style: none;
+  padding: 0;
+}
+
 #taskList li {
   padding: 10px;
   border-bottom: 1px solid #ddd;
