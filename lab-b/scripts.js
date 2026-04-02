@@ -111,12 +111,15 @@ class Todo {
 
     textInput.focus();
 
-    const saveEdit = () => {
+    const saveEdit = (e) => {
+      if (li.contains(e.target)) return; // klik wciąż w edycji
+
       const newText = textInput.value.trim();
       const newDate = dateInput.value;
 
       if (newText.length < 3 || newText.length > 255) {
         alert("3-255 znaków");
+        document.removeEventListener("click", saveEdit);
         this.draw();
         return;
       }
@@ -126,6 +129,7 @@ class Todo {
         const selected = new Date(newDate);
         if (selected <= now) {
           alert("Data musi być w przyszłości");
+          document.removeEventListener("click", saveEdit);
           this.draw();
           return;
         }
@@ -135,14 +139,12 @@ class Todo {
       this.tasks[index].date = newDate || null;
 
       this.save();
+      document.removeEventListener("click", saveEdit);
       this.draw();
     };
 
-    textInput.addEventListener("blur", saveEdit);
-    dateInput.addEventListener("blur", saveEdit);
-
-    textInput.addEventListener("keypress", e => {
-      if (e.key === "Enter") textInput.blur();
+    setTimeout(() => {
+      document.addEventListener("click", saveEdit);
     });
   }
 }
