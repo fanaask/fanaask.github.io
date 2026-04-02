@@ -12,18 +12,7 @@ body {
   align-items: center;
 }
 
-#search {
-  width: 50%;
-  padding: 10px;
-  margin-bottom: 15px;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-li {
+#taskList li {
   padding: 10px;
   border-bottom: 1px solid #ddd;
   display: flex;
@@ -31,7 +20,7 @@ li {
   align-items: center;
 }
 
-li span {
+#taskList li span {
   flex-grow: 1;
   cursor: pointer;
 }
@@ -52,4 +41,8 @@ li span {
 
 .highlight {
   background: yellow;
+}
+
+input[type="text"], input[type="datetime-local"] {
+  padding: 5px;
 }
