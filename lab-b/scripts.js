@@ -43,7 +43,7 @@ class Todo {
       span.addEventListener("click", () => this.edit(index));
 
       const del = document.createElement("button");
-      del.textContent = "🗑";
+      del.textContent = "Usuń";
       del.className = "delete-btn";
       del.addEventListener("click", () => this.remove(index));
 
