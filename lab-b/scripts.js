@@ -2,11 +2,11 @@ class Todo {
   constructor() {
     this.tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-    this.taskInput = document.getElementById("wpisZ");
-    this.taskDate = document.getElementById("dataZ");
-    this.addBtn = document.getElementById("dodG");
-    this.taskList = document.getElementById("listaZ");
-    this.search = document.getElementById("szuk");
+    this.taskInput = document.getElementById("taskInput");
+    this.taskDate = document.getElementById("taskDate");
+    this.addBtn = document.getElementById("addBtn");
+    this.taskList = document.getElementById("taskList");
+    this.search = document.getElementById("search");
 
     this.addBtn.addEventListener("click", () => this.addTask());
     this.search.addEventListener("input", () => this.draw());
