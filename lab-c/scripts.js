@@ -50,12 +50,15 @@ function getMap() {
     return;
   }
 
-  const lat = currentPosition.latitude;
-  const lon = currentPosition.longitude;
+  leafletImage(map, function(err, canvas) {
+    if (err) {
+      alert("Błąd generowania mapy!");
+      return;
+    }
 
-  const url = `https://staticmap.openstreetmap.de/staticmap.php?center=${lat},${lon}&zoom=15&size=400x400&markers=${lat},${lon},red-pushpin`;
-
-  createPuzzle(url);
+    const imageSrc = canvas.toDataURL("image/png");
+    createPuzzle(imageSrc);
+  });
 }
 
 // 🔴 NAJWAŻNIEJSZE: czekanie aż obraz się załaduje
