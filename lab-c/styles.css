@@ -1,0 +1,34 @@
+body {
+  font-family: Arial, sans-serif;
+  background: dimgray;
+  color: white;
+  text-align: center;
+}
+
+.controls {
+  margin: 10px;
+}
+
+#map {
+  height: 400px;
+  width: 80%;
+  margin: 20px auto;
+  border: 2px solid white;
+}
+
+#puzzle-container {
+  width: 400px;
+  height: 400px;
+  margin: 20px auto;
+  display: flex;
+  flex-wrap: wrap;
+  border: 2px solid white;
+}
+
+.puzzle-piece {
+  width: 25%;
+  height: 25%;
+  background-size: 400px 400px;
+  border: 1px solid black;
+  cursor: grab;
+}

@@ -3,26 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Marcel Nackowicz (55586) - PTW LAB B</title>
+    <title>Marcel Nackowicz (55586) - PTW LAB C</title>
 
-    <link rel="stylesheet" href="lab-b/styles.css" type="text/css">
-    <script src="lab-b/scripts.js" defer></script>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <script src="scripts.js" defer></script>
 </head>
 <body>
 
-<div class="container">
-    <h1>Lista zadań</h1>
-
-    <input type="text" id="search" placeholder="Wyszukaj">
-
-    <ul id="taskList"></ul>
-
-    <div class="add-task">
-        <input type="text" id="taskInput" placeholder="Nowe zadanie">
-        <input type="datetime-local" id="taskDate">
-        <button id="addTaskBtn">Dodaj</button>
-    </div>
+<div class="controls">
+    <button onclick="getLocation()">Moja lokalizacja</button>
+    <button onclick="getMap()">Pobierz mapę</button>
+    <button onclick="requestNotification()">Powiadomienia</button>
 </div>
+
+<div id="position">
+    Latitude: <span id="latitude"></span><br>
+    Longitude: <span id="longitude"></span>
+</div>
+
+<div id="map"></div>
+
+<h2>Puzzle</h2>
+<div id="puzzle-container"></div>
 
 </body>
 </html>

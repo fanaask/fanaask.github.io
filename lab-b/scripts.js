@@ -146,7 +146,6 @@ class Todo {
     setTimeout(() => {
       document.addEventListener("click", saveEdit);
     });
-  }
-}
+  }}
 
 const todo = new Todo();
