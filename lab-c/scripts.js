@@ -61,7 +61,6 @@ function getMap() {
   });
 }
 
-// 🔴 NAJWAŻNIEJSZE: czekanie aż obraz się załaduje
 function createPuzzle(imageSrc) {
   const img = new Image();
 
@@ -88,7 +87,6 @@ function buildPuzzle(imageSrc) {
 
   let pieces = [];
 
-  // plansza (sloty)
   for (let i = 0; i < size * size; i++) {
     const slot = document.createElement("div");
     slot.classList.add("slot");
@@ -107,7 +105,6 @@ function buildPuzzle(imageSrc) {
     board.appendChild(slot);
   }
 
-  // elementy puzzli
   for (let y = 0; y < size; y++) {
     for (let x = 0; x < size; x++) {
 
