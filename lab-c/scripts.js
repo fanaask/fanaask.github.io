@@ -1,7 +1,7 @@
 let map;
 let marker;
 let currentPosition;
-let puzzlePieces = [];
+let dragged = null;
 
 window.onload = () => {
   initMap();
@@ -52,13 +52,28 @@ function getMap() {
 
   const lat = currentPosition.latitude;
   const lon = currentPosition.longitude;
-  
-  const url = `https://staticmap.openstreetmap.de/staticmap.php?center=${lat},${lon}&zoom=15&size=400x400`;
+
+  const url = `https://staticmap.openstreetmap.de/staticmap.php?center=${lat},${lon}&zoom=15&size=400x400&markers=${lat},${lon},red-pushpin`;
 
   createPuzzle(url);
 }
 
+// 🔴 NAJWAŻNIEJSZE: czekanie aż obraz się załaduje
 function createPuzzle(imageSrc) {
+  const img = new Image();
+
+  img.onload = () => {
+    buildPuzzle(imageSrc);
+  };
+
+  img.onerror = () => {
+    alert("Nie udało się pobrać mapy!");
+  };
+
+  img.src = imageSrc;
+}
+
+function buildPuzzle(imageSrc) {
   const piecesContainer = document.getElementById("pieces");
   const board = document.getElementById("board");
 
@@ -70,26 +85,26 @@ function createPuzzle(imageSrc) {
 
   let pieces = [];
 
+  // plansza (sloty)
   for (let i = 0; i < size * size; i++) {
     const slot = document.createElement("div");
     slot.classList.add("slot");
-
     slot.dataset.index = i;
 
     slot.addEventListener("dragover", e => e.preventDefault());
 
     slot.addEventListener("drop", function () {
       if (!dragged) return;
+      if (this.children.length > 0) return;
 
-      this.innerHTML = "";
       this.appendChild(dragged);
-
       checkWin();
     });
 
     board.appendChild(slot);
   }
 
+  // elementy puzzli
   for (let y = 0; y < size; y++) {
     for (let x = 0; x < size; x++) {
 
@@ -112,40 +127,14 @@ function createPuzzle(imageSrc) {
   }
 
   shuffle(pieces);
-
   pieces.forEach(p => piecesContainer.appendChild(p));
 }
-
-createPuzzle("https://picsum.photos/400");
 
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
-}
-
-let dragged = null;
-
-function addDragEvents(element) {
-  element.addEventListener("dragstart", () => {
-    dragged = element;
-  });
-
-  element.addEventListener("dragover", (e) => {
-    e.preventDefault();
-  });
-
-  element.addEventListener("drop", function () {
-    if (dragged === this) return;
-
-    let parent = this.parentNode;
-
-    parent.insertBefore(dragged, this);
-    parent.insertBefore(this, dragged);
-
-    checkWin();
-  });
 }
 
 function checkWin() {
