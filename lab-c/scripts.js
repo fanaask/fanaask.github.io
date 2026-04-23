@@ -116,6 +116,8 @@ function createPuzzle(imageSrc) {
   pieces.forEach(p => piecesContainer.appendChild(p));
 }
 
+createPuzzle("https://picsum.photos/400");
+
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
