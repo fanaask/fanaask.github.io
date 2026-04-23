@@ -5,6 +5,7 @@ let puzzlePieces = [];
 
 window.onload = () => {
   initMap();
+  requestNotification();
 };
 
 function initMap() {
@@ -43,7 +44,6 @@ function getLocation() {
   });
 }
 
-// 📸 Pobieranie mapy (canvas)
 function getMap() {
   html2canvas(document.getElementById("map")).then(canvas => {
     const img = canvas.toDataURL("image/png");
@@ -51,7 +51,6 @@ function getMap() {
   });
 }
 
-// 🧩 Tworzenie puzzli
 function createPuzzle(imageSrc) {
   const container = document.getElementById("puzzle-container");
   container.innerHTML = "";
@@ -67,6 +66,7 @@ function createPuzzle(imageSrc) {
       piece.draggable = true;
 
       piece.style.backgroundImage = `url(${imageSrc})`;
+      piece.style.backgroundSize = "400px 400px";
       piece.style.backgroundPosition = `${-x * 100}px ${-y * 100}px`;
 
       piece.dataset.correctX = x;
@@ -83,7 +83,6 @@ function createPuzzle(imageSrc) {
   puzzlePieces.forEach(p => container.appendChild(p));
 }
 
-// 🔀 Tasowanie
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -91,7 +90,6 @@ function shuffle(array) {
   }
 }
 
-// 🖱 Drag & Drop
 let dragged;
 
 function addDragEvents(element) {
@@ -115,7 +113,6 @@ function addDragEvents(element) {
   });
 }
 
-// ✅ Sprawdzanie ułożenia
 function checkWin() {
   const pieces = document.querySelectorAll(".puzzle-piece");
 
@@ -135,14 +132,15 @@ function checkWin() {
   }
 }
 
-// 🔔 Powiadomienia
 function requestNotification() {
-  Notification.requestPermission();
+  if ("Notification" in window) {
+    Notification.requestPermission();
+  }
 }
 
 function showNotification() {
   if (Notification.permission === "granted") {
-    new Notification("Gratulacje! 🎉", {
+    new Notification("Gratulacje!", {
       body: "Ułożyłeś puzzle!"
     });
   }
