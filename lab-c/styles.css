@@ -9,6 +9,10 @@ body {
   margin: 10px;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 #map {
   height: 400px;
   width: 80%;
@@ -27,6 +31,7 @@ body {
   height: 400px;
   display: flex;
   flex-wrap: wrap;
+  align-content: flex-start;
 }
 
 #pieces {
