@@ -9,6 +9,10 @@ body {
   margin: 10px;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 #map {
   height: 400px;
   width: 80%;
@@ -16,19 +20,36 @@ body {
   border: 2px solid white;
 }
 
-#puzzle-container {
+.boards {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+#pieces, #board {
   width: 400px;
   height: 400px;
-  margin: 20px auto;
   display: flex;
   flex-wrap: wrap;
-  border: 2px solid white;
+  align-content: flex-start;
+}
+
+#pieces {
+  background: #444;
+}
+
+.slot {
+  width: 100px;
+  height: 100px;
+  border: 1px dashed white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .puzzle-piece {
-  width: 25%;
-  height: 25%;
+  width: 100px;
+  height: 100px;
   background-size: 400px 400px;
-  border: 1px solid black;
   cursor: grab;
 }

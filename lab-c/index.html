@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Marcel Nackowicz (55586) - PTW LAB C</title>
 
-    <link rel="stylesheet" href="styles.css" type="text/css">
+    <link rel="stylesheet" href="lab-c/styles.css" type="text/css">
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-    <script src="scripts.js" defer></script>
+    <script src="https://unpkg.com/leaflet-image/leaflet-image.js"></script>
+
+    <script src="lab-c/scripts.js" defer></script>
 </head>
 <body>
 
 <div class="controls">
     <button onclick="getLocation()">Moja lokalizacja</button>
-    <button onclick="getMap()">Pobierz mapę</button>
-    <button onclick="requestNotification()">Powiadomienia</button>
+    <button onclick="getMap()">Pobierz mape</button>
 </div>
 
 <div id="position">
@@ -28,7 +29,17 @@
 <div id="map"></div>
 
 <h2>Puzzle</h2>
-<div id="puzzle-container"></div>
+<div class="boards">
+  <div>
+    <h3>Elementy</h3>
+    <div id="pieces"></div>
+  </div>
+
+  <div>
+    <h3>Plansza</h3>
+    <div id="board"></div>
+  </div>
+</div>
 
 </body>
 </html>

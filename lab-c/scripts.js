@@ -1,10 +1,11 @@
 let map;
 let marker;
 let currentPosition;
-let puzzlePieces = [];
+let dragged = null;
 
 window.onload = () => {
   initMap();
+  requestNotification();
 };
 
 function initMap() {
@@ -43,21 +44,66 @@ function getLocation() {
   });
 }
 
-// 📸 Pobieranie mapy (canvas)
 function getMap() {
-  html2canvas(document.getElementById("map")).then(canvas => {
-    const img = canvas.toDataURL("image/png");
-    createPuzzle(img);
+  if (!currentPosition) {
+    alert("Najpierw pobierz lokalizację!");
+    return;
+  }
+
+  leafletImage(map, function(err, canvas) {
+    if (err) {
+      alert("Błąd generowania mapy!");
+      return;
+    }
+
+    const imageSrc = canvas.toDataURL("image/png");
+    createPuzzle(imageSrc);
   });
 }
 
-// 🧩 Tworzenie puzzli
 function createPuzzle(imageSrc) {
-  const container = document.getElementById("puzzle-container");
-  container.innerHTML = "";
-  puzzlePieces = [];
+  const img = new Image();
+
+  img.onload = () => {
+    buildPuzzle(imageSrc);
+  };
+
+  img.onerror = () => {
+    alert("Nie udało się pobrać mapy!");
+  };
+
+  img.src = imageSrc;
+}
+
+function buildPuzzle(imageSrc) {
+  const piecesContainer = document.getElementById("pieces");
+  const board = document.getElementById("board");
+
+  piecesContainer.innerHTML = "";
+  board.innerHTML = "";
 
   const size = 4;
+  const pieceSize = 100;
+
+  let pieces = [];
+
+  for (let i = 0; i < size * size; i++) {
+    const slot = document.createElement("div");
+    slot.classList.add("slot");
+    slot.dataset.index = i;
+
+    slot.addEventListener("dragover", e => e.preventDefault());
+
+    slot.addEventListener("drop", function () {
+      if (!dragged) return;
+      if (this.children.length > 0) return;
+
+      this.appendChild(dragged);
+      checkWin();
+    });
+
+    board.appendChild(slot);
+  }
 
   for (let y = 0; y < size; y++) {
     for (let x = 0; x < size; x++) {
@@ -67,23 +113,23 @@ function createPuzzle(imageSrc) {
       piece.draggable = true;
 
       piece.style.backgroundImage = `url(${imageSrc})`;
-      piece.style.backgroundPosition = `${-x * 100}px ${-y * 100}px`;
+      piece.style.backgroundSize = "400px 400px";
+      piece.style.backgroundPosition = `${-x * pieceSize}px ${-y * pieceSize}px`;
 
-      piece.dataset.correctX = x;
-      piece.dataset.correctY = y;
+      piece.dataset.correctIndex = y * size + x;
 
-      addDragEvents(piece);
+      piece.addEventListener("dragstart", () => {
+        dragged = piece;
+      });
 
-      puzzlePieces.push(piece);
+      pieces.push(piece);
     }
   }
 
-  shuffle(puzzlePieces);
-
-  puzzlePieces.forEach(p => container.appendChild(p));
+  shuffle(pieces);
+  pieces.forEach(p => piecesContainer.appendChild(p));
 }
 
-// 🔀 Tasowanie
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -91,41 +137,15 @@ function shuffle(array) {
   }
 }
 
-// 🖱 Drag & Drop
-let dragged;
-
-function addDragEvents(element) {
-  element.addEventListener("dragstart", () => {
-    dragged = element;
-  });
-
-  element.addEventListener("dragover", (e) => {
-    e.preventDefault();
-  });
-
-  element.addEventListener("drop", function () {
-    if (dragged === this) return;
-
-    let parent = this.parentNode;
-
-    parent.insertBefore(dragged, this);
-    parent.insertBefore(this, dragged);
-
-    checkWin();
-  });
-}
-
-// ✅ Sprawdzanie ułożenia
 function checkWin() {
-  const pieces = document.querySelectorAll(".puzzle-piece");
+  const slots = document.querySelectorAll("#board .slot");
 
   let correct = true;
 
-  pieces.forEach((piece, index) => {
-    const x = index % 4;
-    const y = Math.floor(index / 4);
+  slots.forEach((slot, index) => {
+    const piece = slot.firstChild;
 
-    if (piece.dataset.correctX != x || piece.dataset.correctY != y) {
+    if (!piece || piece.dataset.correctIndex != index) {
       correct = false;
     }
   });
@@ -135,14 +155,15 @@ function checkWin() {
   }
 }
 
-// 🔔 Powiadomienia
 function requestNotification() {
-  Notification.requestPermission();
+  if ("Notification" in window) {
+    Notification.requestPermission();
+  }
 }
 
 function showNotification() {
   if (Notification.permission === "granted") {
-    new Notification("Gratulacje! 🎉", {
+    new Notification("Gratulacje!", {
       body: "Ułożyłeś puzzle!"
     });
   }
